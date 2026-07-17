@@ -1,12 +1,610 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Ezz Nasr</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ezz Nasr : Backend / Embedded / Hardware</title>
+<meta name="description" content="Ezz Nasr. Computer Engineering student building backend systems, embedded hardware, and PCB-level electronics.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230B2318'/%3E%3Cpath d='M8 8h6v6H8zM18 8h6v6h-6zM8 18h6v6H8zM18 18h6v6h-6zM14 11h4M11 14v4M21 14v4M14 21h4' stroke='%23C9974C' stroke-width='1.4' fill='none'/%3E%3C/svg%3E" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B2318;
+    --bg-soft:#0F2C1E;
+    --panel:#123420;
+    --line:#25523A;
+    --line-faint:rgba(201,151,76,0.14);
+    --copper:#C9974C;
+    --copper-bright:#E3B168;
+    --ink:#EDEAE0;
+    --ink-dim:#9FB3A6;
+    --status-shipped:#7CB68A;
+    --status-progress:#C9974C;
+    --status-active:#8FB3D9;
+    --mono:'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --serif:'Source Serif 4', Georgia, serif;
+    --maxw:1080px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
+  }
+
+  body{
+    margin:0;
+    background:
+      linear-gradient(var(--line-faint) 1px, transparent 1px) 0 0/100% 42px,
+      linear-gradient(90deg, var(--line-faint) 1px, transparent 1px) 0 0/42px 100%,
+      var(--bg);
+    color:var(--ink);
+    font-family:var(--serif);
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:var(--copper-bright);}
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--copper-bright);
+    outline-offset:3px;
+  }
+
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--copper);
+  }
+
+  h1,h2,h3{
+    font-family:var(--mono);
+    text-transform:uppercase;
+    letter-spacing:0.03em;
+    color:var(--ink);
+    margin:0;
+  }
+
+  /* ---------- corner registration marks, the signature motif ---------- */
+  .frame{
+    position:relative;
+    border:1px solid var(--line);
+  }
+  .frame::before,.frame::after,
+  .frame .tick-br,.frame .tick-bl{
+    content:"";
+    position:absolute;
+    width:10px;
+    height:10px;
+    border-color:var(--copper);
+    border-style:solid;
+    border-width:0;
+    opacity:0.85;
+  }
+  .frame::before{ top:-1px; left:-1px; border-top-width:2px; border-left-width:2px; }
+  .frame::after{ top:-1px; right:-1px; border-top-width:2px; border-right-width:2px; }
+  .frame .tick-bl{ bottom:-1px; left:-1px; border-bottom-width:2px; border-left-width:2px; }
+  .frame .tick-br{ bottom:-1px; right:-1px; border-bottom-width:2px; border-right-width:2px; }
+
+  /* ---------- header / title block ---------- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:rgba(11,35,24,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .titlebar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 0;
+    gap:16px;
+  }
+  .titlebar .mark{
+    font-family:var(--mono);
+    font-weight:600;
+    letter-spacing:0.06em;
+    font-size:14px;
+    color:var(--ink);
+    display:flex;
+    align-items:center;
+    gap:8px;
+    text-decoration:none;
+  }
+  .titlebar .mark .dot{
+    width:7px;height:7px;border-radius:1px;background:var(--copper);
+    box-shadow:0 0 6px var(--copper);
+  }
+  nav{
+    display:flex;
+    gap:22px;
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+  }
+  nav a{color:var(--ink-dim); text-decoration:none; transition:color .15s ease;}
+  nav a:hover{color:var(--copper-bright);}
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding:88px 0 64px;
+  }
+  .hero .tb-meta{
+    display:grid;
+    grid-template-columns:repeat(4,auto);
+    gap:0;
+    border:1px solid var(--line);
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:0.06em;
+    color:var(--ink-dim);
+    margin-bottom:40px;
+    width:fit-content;
+  }
+  .tb-meta div{
+    padding:8px 14px;
+    border-right:1px solid var(--line);
+  }
+  .tb-meta div:last-child{border-right:none;}
+  .tb-meta b{display:block; color:var(--copper); font-weight:600; margin-bottom:2px; font-size:10px;}
+
+  .hero h1{
+    font-size:clamp(42px,7vw,84px);
+    line-height:0.98;
+    margin-bottom:18px;
+  }
+  .hero .role{
+    font-family:var(--mono);
+    font-size:clamp(13px,2vw,16px);
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--copper-bright);
+    margin-bottom:26px;
+  }
+  .hero p.lede{
+    max-width:560px;
+    font-size:19px;
+    color:var(--ink-dim);
+  }
+  .hero .cta-row{
+    display:flex;
+    gap:14px;
+    margin-top:34px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    text-decoration:none;
+    padding:12px 20px;
+    border:1px solid var(--copper);
+    color:var(--ink);
+    transition:background .15s ease, color .15s ease;
+  }
+  .btn.solid{ background:var(--copper); color:var(--bg); }
+  .btn.solid:hover{ background:var(--copper-bright); }
+  .btn:not(.solid):hover{ background:rgba(201,151,76,0.12); }
+
+  /* ---------- sections ---------- */
+  section{ padding:72px 0; border-top:1px solid var(--line); }
+  .section-head{ margin-bottom:36px; }
+  .section-head h2{ font-size:22px; margin-top:6px; }
+
+  .about-grid{
+    display:grid;
+    grid-template-columns:280px 1fr;
+    gap:48px;
+  }
+  .fact-panel{ padding:20px; }
+  .fact-panel dl{ margin:0; font-family:var(--mono); font-size:12.5px; }
+  .fact-panel dt{ color:var(--copper); text-transform:uppercase; letter-spacing:0.08em; margin-top:14px; }
+  .fact-panel dt:first-child{ margin-top:0; }
+  .fact-panel dd{ margin:3px 0 0; color:var(--ink); }
+  .about-copy p{ color:var(--ink-dim); margin:0 0 16px; }
+  .about-copy strong{ color:var(--ink); font-weight:600; }
+
+  .focus-list{ list-style:none; margin:20px 0 0; padding:0; font-family:var(--mono); font-size:12.5px; }
+  .focus-list li{
+    display:flex; gap:10px; align-items:baseline;
+    padding:7px 0; border-top:1px dashed var(--line); color:var(--ink-dim);
+  }
+  .focus-list li:first-child{ border-top:none; }
+  .focus-list li::before{ content:"\25A2"; color:var(--copper); flex:0 0 auto; }
+
+  /* ---------- BOM table ---------- */
+  table.bom{
+    width:100%;
+    border-collapse:collapse;
+    font-family:var(--mono);
+    font-size:12.5px;
+  }
+  table.bom caption{
+    text-align:left;
+    font-size:11px;
+    color:var(--ink-dim);
+    letter-spacing:0.08em;
+    margin-bottom:10px;
+  }
+  table.bom th{
+    text-align:left;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--copper);
+    font-weight:600;
+    padding:9px 12px;
+    border-bottom:1px solid var(--line);
+    font-size:11px;
+  }
+  table.bom td{
+    padding:11px 12px;
+    border-bottom:1px solid var(--line);
+    color:var(--ink-dim);
+    vertical-align:top;
+  }
+  table.bom tr:hover td{ background:rgba(201,151,76,0.05); color:var(--ink); }
+  table.bom td.ref{ color:var(--copper-bright); font-weight:600; white-space:nowrap; }
+  table.bom td.item{ color:var(--ink); }
+
+  /* ---------- project modules ---------- */
+  .modules{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+  }
+  .module{ padding:22px 22px 20px; display:flex; flex-direction:column; gap:12px; }
+  .module-top{ display:flex; justify-content:space-between; align-items:flex-start; gap:12px; }
+  .module h3{ font-size:15px; letter-spacing:0.04em; }
+  .stamp{
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    padding:4px 8px;
+    border:1px solid currentColor;
+    white-space:nowrap;
+    flex:0 0 auto;
+  }
+  .stamp.shipped{ color:var(--status-shipped); }
+  .stamp.progress{ color:var(--status-progress); }
+  .stamp.active{ color:var(--status-active); }
+  .module p{ color:var(--ink-dim); font-size:15px; margin:0; }
+  .chips{ display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; padding-top:6px; }
+  .chip{
+    font-family:var(--mono);
+    font-size:10.5px;
+    letter-spacing:0.04em;
+    color:var(--ink-dim);
+    border:1px solid var(--line);
+    padding:3px 8px;
+  }
+  .module-link{
+    font-family:var(--mono);
+    font-size:11.5px;
+    letter-spacing:0.06em;
+    text-decoration:none;
+    color:var(--copper-bright);
+  }
+  .module-link::after{ content:" \2192"; }
+
+  /* ---------- coursework tools ---------- */
+  .tools-row{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+  }
+  .tool-card{ padding:16px; }
+  .tool-card .eyebrow{ display:block; margin-bottom:6px; }
+  .tool-card h4{ font-family:var(--mono); font-size:13px; margin:0 0 6px; color:var(--ink); text-transform:none; letter-spacing:0; }
+  .tool-card p{ margin:0; font-size:13.5px; color:var(--ink-dim); }
+  .tool-card a{ font-family:var(--mono); font-size:11px; text-decoration:none; }
+
+  /* ---------- revision history ---------- */
+  table.rev{ width:100%; border-collapse:collapse; }
+  table.rev th{
+    text-align:left; font-family:var(--mono); font-size:11px; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--copper); padding:9px 12px; border-bottom:1px solid var(--line);
+  }
+  table.rev td{ padding:14px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
+  table.rev td.rev-id{ font-family:var(--mono); color:var(--copper-bright); white-space:nowrap; font-size:13px; }
+  table.rev td.rev-date{ font-family:var(--mono); color:var(--ink-dim); font-size:13px; white-space:nowrap; }
+  table.rev td.rev-note{ color:var(--ink-dim); font-size:14.5px; }
+
+  /* ---------- footer / title block ---------- */
+  footer{ border-top:1px solid var(--line); padding:48px 0 36px; }
+  .footer-grid{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:24px;
+  }
+  .footer-links{ display:flex; gap:22px; flex-wrap:wrap; font-family:var(--mono); font-size:12.5px; letter-spacing:0.06em; }
+  .footer-links a{ color:var(--ink-dim); text-decoration:none; }
+  .footer-links a:hover{ color:var(--copper-bright); }
+  .footer-note{ font-family:var(--mono); font-size:11px; color:var(--ink-dim); letter-spacing:0.04em; }
+
+  /* ---------- reveal on scroll ---------- */
+  .reveal{ opacity:0; transform:translateY(14px); transition:opacity .5s ease, transform .5s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* ---------- responsive ---------- */
+  @media (max-width:760px){
+    .about-grid{ grid-template-columns:1fr; }
+    .modules{ grid-template-columns:1fr; }
+    .tools-row{ grid-template-columns:1fr; }
+    .tb-meta{ grid-template-columns:repeat(2,auto); }
+    nav{ display:none; }
+    table.bom{ font-size:11.5px; }
+    table.bom th:nth-child(4), table.bom td:nth-child(4){ display:none; }
+  }
+</style>
 </head>
 <body>
-    <h1>Hello!</h1>
-    <p>This is my new website.</p>
-    
-<script data-collect-dnt="true" async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+
+<header>
+  <div class="wrap titlebar">
+    <a href="#top" class="mark"><span class="dot"></span> EZZ NASR</a>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#stack">Stack</a>
+      <a href="#work">Work</a>
+      <a href="#history">History</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <div class="wrap hero">
+    <div class="tb-meta">
+      <div><b>Dwg No.</b>EN-2026-01</div>
+      <div><b>Rev</b>2026.07</div>
+      <div><b>Scale</b>1:1</div>
+      <div><b>Sheet</b>1 of 1</div>
+    </div>
+
+    <h1>Ezz Nasr</h1>
+    <div class="role">Backend &nbsp;/&nbsp; Embedded &nbsp;/&nbsp; Hardware</div>
+    <p class="lede">Third-year Computer Engineering student who builds complete systems end to end: the API and the database behind it, the interface on top, and, when the project calls for it, the circuit board underneath. Everything below is public or documented, so it can be checked, not just read.</p>
+
+    <div class="cta-row">
+      <a class="btn solid" href="#work">See the work</a>
+      <a class="btn" href="mailto:ezznasrone@gmail.com">Email me</a>
+      <a class="btn" href="https://github.com/EzzNasr" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">01 &nbsp;/&nbsp; About</span>
+        <h2>Who's building this</h2>
+      </div>
+      <div class="about-grid">
+        <div class="fact-panel frame reveal">
+          <span class="tick-br"></span><span class="tick-bl"></span>
+          <dl>
+            <dt>School</dt><dd>Alexandria University</dd>
+            <dt>Track</dt><dd>Computer Communications &amp; AI</dd>
+            <dt>Year</dt><dd>Third year</dd>
+            <dt>Graduating</dt><dd>2028</dd>
+            <dt>Program</dt><dd>DEPI Scholarship, Ministry of Education</dd>
+            <dt>Studying now</dt><dd>AWS Certified Cloud Practitioner, target Oct 2026</dd>
+          </dl>
+        </div>
+        <div class="about-copy reveal">
+          <p><strong>I'd rather ship one complete system than five half-finished demos.</strong> My main project, a factory ERP, is already running in daily use at a manufacturing business. My invoice tool went through three real iterations, from a command-line script to a published web app. My NFC lock exists as an actual soldered board, routed in KiCad and verified in Falstad before it ever ran firmware.</p>
+          <p>I write backend services in FastAPI, interfaces in React, and firmware in C++. I document all of it in LaTeX, the same way I'd write an engineering report, because a project nobody can read is a project nobody can trust.</p>
+          <ul class="focus-list">
+            <li>Refactoring the Factory ERP for public release</li>
+            <li>Training for ICPC in C++</li>
+            <li>Designing and routing PCBs in KiCad</li>
+            <li>Learning system design and PostgreSQL</li>
+            <li>Studying German, aiming for a Master's in Germany</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="stack">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">02 &nbsp;/&nbsp; Stack</span>
+        <h2>Bill of materials</h2>
+      </div>
+      <div class="frame reveal" style="padding:22px;">
+        <span class="tick-br"></span><span class="tick-bl"></span>
+        <table class="bom">
+          <caption>Everything currently in use, listed the way a schematic lists its parts.</caption>
+          <thead>
+            <tr><th>Ref</th><th>Item</th><th>Category</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="ref">U1</td><td class="item">C · C++ · Python · Java · JavaScript · SQL</td><td>Languages</td><td>DSA coursework was in C; C++ carries the projects</td></tr>
+            <tr><td class="ref">U2</td><td class="item">FastAPI · REST APIs · Auth · PDF generation</td><td>Backend</td><td>Primary specialization</td></tr>
+            <tr><td class="ref">U3</td><td class="item">React · Vite · HTML5 · CSS3</td><td>Frontend</td><td>Interfaces for the backend services</td></tr>
+            <tr><td class="ref">U4</td><td class="item">SQLite · PostgreSQL</td><td>Database</td><td>SQLite in production, Postgres in progress</td></tr>
+            <tr><td class="ref">U5</td><td class="item">ESP32 · Arduino · KiCad · Falstad</td><td>Embedded / Hardware</td><td>Firmware through PCB layout and simulation</td></tr>
+            <tr><td class="ref">U6</td><td class="item">LaTeX · Git · GitHub · VS Code</td><td>Docs / Tools</td><td>Reports, version control, day to day work</td></tr>
+            <tr><td class="ref">C1</td><td class="item">AWS Certified Cloud Practitioner</td><td>Certification</td><td>In progress, target Oct 2026</td></tr>
+            <tr><td class="ref">C2</td><td class="item">DEPI Scholarship</td><td>Program</td><td>Ministry of Education, accepted</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">03 &nbsp;/&nbsp; Work</span>
+        <h2>Featured projects</h2>
+      </div>
+      <div class="modules">
+
+        <div class="module frame reveal">
+          <span class="tick-br"></span><span class="tick-bl"></span>
+          <div class="module-top">
+            <h3>Factory ERP</h3>
+            <span class="stamp progress">In production</span>
+          </div>
+          <p>A full ERP built for a real manufacturing business, not a class project. It handles inventory, orders, invoicing, employees, and financial reporting, and it's in daily use at the company right now. The public repo is on hold until a cleanup pass is done.</p>
+          <div class="chips">
+            <span class="chip">FastAPI</span><span class="chip">React</span><span class="chip">SQLite</span><span class="chip">PDF generation</span>
+          </div>
+          <span class="module-link" style="color:var(--ink-dim); cursor:default;">Repo publishing after refactor</span>
+        </div>
+
+        <div class="module frame reveal">
+          <span class="tick-br"></span><span class="tick-bl"></span>
+          <div class="module-top">
+            <h3>Invoice App V2</h3>
+            <span class="stamp shipped">Shipped</span>
+          </div>
+          <p>A professional invoicing system that went through three real iterations: a command-line tool, a desktop GUI, and now a full React and FastAPI web app with tagged releases, PDF export, and pricing logic for both retail and wholesale.</p>
+          <div class="chips">
+            <span class="chip">FastAPI</span><span class="chip">React</span><span class="chip">Vite</span><span class="chip">SQLite</span>
+          </div>
+          <a class="module-link" href="https://github.com/EzzNasr/invoice-app-v2" target="_blank" rel="noopener">View repo</a>
+        </div>
+
+        <div class="module frame reveal">
+          <span class="tick-br"></span><span class="tick-bl"></span>
+          <div class="module-top">
+            <h3>NFC Smart Lock</h3>
+            <span class="stamp shipped">Shipped</span>
+          </div>
+          <p>Keyless access control, designed hardware up: a star-topology PCB routed in KiCad, power paths checked in Falstad, an ESP32 driving a PN532 reader and a servo lock. Authenticates with NFC tags, contactless cards, or Apple Pay.</p>
+          <div class="chips">
+            <span class="chip">ESP32</span><span class="chip">KiCad</span><span class="chip">Falstad</span><span class="chip">C++</span>
+          </div>
+          <a class="module-link" href="https://github.com/EzzNasr/NFC-Door-Lock" target="_blank" rel="noopener">View repo</a>
+        </div>
+
+        <div class="module frame reveal">
+          <span class="tick-br"></span><span class="tick-bl"></span>
+          <div class="module-top">
+            <h3>Competitive Programming</h3>
+            <span class="stamp active">Active</span>
+          </div>
+          <p>Ongoing algorithmic training on the ICPC track in C++: graphs, trees, dynamic programming, greedy algorithms, and number theory, built on a Data Structures and Algorithms foundation from formal coursework in C.</p>
+          <div class="chips">
+            <span class="chip">C++</span><span class="chip">STL</span><span class="chip">ICPC / ECPC</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="tools">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">04 &nbsp;/&nbsp; Smaller builds</span>
+        <h2>Coursework support tools</h2>
+      </div>
+      <div class="tools-row">
+        <div class="tool-card frame reveal">
+          <span class="tick-br"></span><span class="tick-bl"></span>
+          <span class="eyebrow">Linear Algebra</span>
+          <h4>Matrix Wizard</h4>
+          <p>A matrix operations solver, written in Python.</p>
+          <a href="https://github.com/EzzNasr/Matrix_Wizard_by-EzzNasr" target="_blank" rel="noopener">Repo →</a>
+        </div>
+        <div class="tool-card frame reveal">
+          <span class="tick-br"></span><span class="tick-bl"></span>
+          <span class="eyebrow">Discrete Structures</span>
+          <h4>Inference</h4>
+          <p>Automates rules of inference proofs, written in Python.</p>
+          <a href="https://github.com/EzzNasr/Inference" target="_blank" rel="noopener">Repo →</a>
+        </div>
+        <div class="tool-card frame reveal">
+          <span class="tick-br"></span><span class="tick-bl"></span>
+          <span class="eyebrow">Prep Year</span>
+          <h4>Engineering Prep Year</h4>
+          <p>Consolidates prep-year study resources into one place.</p>
+          <a href="https://github.com/EzzNasr/Engineering-Prep-Year" target="_blank" rel="noopener">Repo →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="history">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">05 &nbsp;/&nbsp; History</span>
+        <h2>Revision log</h2>
+      </div>
+      <div class="frame reveal" style="padding:22px;">
+        <span class="tick-br"></span><span class="tick-bl"></span>
+        <table class="rev">
+          <thead><tr><th>Rev</th><th>Date</th><th>Change</th></tr></thead>
+          <tbody>
+            <tr><td class="rev-id">2024.0</td><td class="rev-date">2024</td><td class="rev-note">Started programming seriously.</td></tr>
+            <tr><td class="rev-id">2025.0</td><td class="rev-date">2025</td><td class="rev-note">Shipped the first invoice app iteration. Began work on the Factory ERP.</td></tr>
+            <tr><td class="rev-id">2026.0</td><td class="rev-date">2026</td><td class="rev-note">Invoice App V2 shipped. Factory ERP reached feature-complete and went into production use. Built the NFC Smart Lock, from PCB to firmware. Accepted into the DEPI Scholarship. Started ICPC prep and AWS certification study.</td></tr>
+            <tr><td class="rev-id">2028.0</td><td class="rev-date">Expected</td><td class="rev-note">Graduation. Looking toward a Master's in Germany.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">06 &nbsp;/&nbsp; Contact</span>
+      <h2>Get in touch</h2>
+    </div>
+    <div class="footer-grid reveal">
+      <div class="footer-links">
+        <a href="mailto:ezznasrone@gmail.com">ezznasrone@gmail.com</a>
+        <a href="https://www.linkedin.com/in/ezz-nasr-5a51a3368/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/EzzNasr" target="_blank" rel="noopener">GitHub</a>
+      </div>
+      <div class="footer-note">Dwg No. EN-2026-01 &nbsp;·&nbsp; Rev 2026.07 &nbsp;·&nbsp; ezznasr.dev</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      els.forEach(function(el){ el.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(function(el){ io.observe(el); });
+  })();
+</script>
+
 </body>
 </html>
