@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 : Sheet Not Found — Ezz Nasr</title>
+<meta name="description" content="Page not found — Ezz Nasr's site.">
+<!-- 404 pages should never be indexed themselves -->
+<meta name="robots" content="noindex, follow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230B2318'/%3E%3Cpath d='M8 8h6v6H8zM18 8h6v6h-6zM8 18h6v6H8zM18 18h6v6h-6zM14 11h4M11 14v4M21 14v4M14 21h4' stroke='%23C9974C' stroke-width='1.4' fill='none'/%3E%3C/svg%3E" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B2318;
+    --line:#25523A;
+    --line-faint:rgba(201,151,76,0.14);
+    --copper:#C9974C;
+    --copper-bright:#E3B168;
+    --ink:#EDEAE0;
+    --ink-dim:#9FB3A6;
+    --mono:'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --serif:'Source Serif 4', Georgia, serif;
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    background:
+      linear-gradient(var(--line-faint) 1px, transparent 1px) 0 0/100% 42px,
+      linear-gradient(90deg, var(--line-faint) 1px, transparent 1px) 0 0/42px 100%,
+      var(--bg);
+    color:var(--ink);
+    font-family:var(--serif);
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  a{color:var(--copper-bright);}
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--copper-bright);
+    outline-offset:3px;
+  }
+  .wrap{
+    max-width:var(--maxw);
+    width:100%;
+    padding:28px;
+    text-align:center;
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--copper);
+  }
+  h1,h2{
+    font-family:var(--mono);
+    text-transform:uppercase;
+    letter-spacing:0.03em;
+    color:var(--ink);
+    margin:0;
+  }
+  .tb-meta{
+    display:inline-grid;
+    grid-template-columns:repeat(4,auto);
+    gap:0;
+    border:1px solid var(--line);
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:0.06em;
+    color:var(--ink-dim);
+    margin-bottom:44px;
+  }
+  .tb-meta div{
+    padding:8px 14px;
+    border-right:1px solid var(--line);
+  }
+  .tb-meta div:last-child{border-right:none;}
+  .tb-meta b{display:block; color:var(--copper); font-weight:600; margin-bottom:2px; font-size:10px;}
+  .frame{
+    position:relative;
+    border:1px solid var(--line);
+    background:var(--bg);
+    padding:56px 40px;
+  }
+  .frame::before,.frame::after,
+  .frame .tick-br,.frame .tick-bl{
+    content:"";
+    position:absolute;
+    width:12px;
+    height:12px;
+    border-color:var(--copper);
+    border-style:solid;
+    border-width:0;
+    opacity:0.85;
+  }
+  .frame::before{ top:-1px; left:-1px; border-top-width:2px; border-left-width:2px; }
+  .frame::after{ top:-1px; right:-1px; border-top-width:2px; border-right-width:2px; }
+  .frame .tick-bl{ bottom:-1px; left:-1px; border-bottom-width:2px; border-left-width:2px; }
+  .frame .tick-br{ bottom:-1px; right:-1px; border-bottom-width:2px; border-right-width:2px; }
+  .code{
+    font-family:var(--mono);
+    font-size:clamp(64px,14vw,140px);
+    line-height:0.9;
+    color:var(--copper-bright);
+    letter-spacing:0.02em;
+    margin-bottom:8px;
+    text-shadow:0 0 24px rgba(227,177,104,0.25);
+  }
+  .frame h2{
+    font-size:clamp(16px,2.4vw,20px);
+    margin-bottom:14px;
+  }
+  .frame p.lede{
+    max-width:480px;
+    margin:0 auto 34px;
+    color:var(--ink-dim);
+    font-size:16px;
+  }
+  .cta-row{
+    display:flex;
+    gap:14px;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+  .btn{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    text-decoration:none;
+    padding:12px 20px;
+    border:1px solid var(--copper);
+    color:var(--ink);
+    transition:background .15s ease, color .15s ease;
+    display:inline-block;
+  }
+  .btn.solid{ background:var(--copper); color:var(--bg); }
+  .btn.solid:hover{ background:var(--copper-bright); }
+  .btn:not(.solid):hover{ background:rgba(201,151,76,0.12); }
+  .crosshatch{
+    margin-top:40px;
+    font-family:var(--mono);
+    font-size:10.5px;
+    letter-spacing:0.08em;
+    color:var(--ink-dim);
+    opacity:0.7;
+  }
+  @media (max-width:520px){
+    .tb-meta{ grid-template-columns:repeat(2,auto); }
+    .frame{ padding:40px 22px; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="tb-meta">
+      <div><b>Dwg No.</b>EN-2026-01</div>
+      <div><b>Rev</b>2026.07</div>
+      <div><b>Sheet</b>404 of &mdash;</div>
+      <div><b>Status</b>Void</div>
+    </div>
+    <div class="frame">
+      <span class="tick-br"></span><span class="tick-bl"></span>
+      <div class="eyebrow">Drawing Not Found</div>
+      <div class="code">404</div>
+      <h2>This sheet doesn't exist in the set</h2>
+      <p class="lede">The page you're looking for was never drafted, or the reference has since been revised. Everything that's actually been built lives on the main sheet.</p>
+      <div class="cta-row">
+        <a class="btn solid" href="/">Back to home</a>
+        <a class="btn" href="/#work">See the work</a>
+        <a class="btn" href="mailto:ezznasrone@gmail.com">Email me</a>
+      </div>
+    </div>
+    <div class="crosshatch">EZZ NASR &nbsp;·&nbsp; ezznasr.dev</div>
+  </div>
+</body>
+</html>
