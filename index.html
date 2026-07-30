@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ezz Nasr : Problem Solver </title>
-<meta name="description" content="Ezz Nasr. Computer Engineering student building Full systems, embedded hardware, and PCB-level electronics.">
+<meta name="description" content="Ezz Nasr - Computer Communications & AI student and software engineer at Alexandria University. Full-stack apps, embedded systems, and PCB design projects.">
 
 <!-- Canonical URL — tells Google this is the one true home for this page's content -->
 <link rel="canonical" href="https://ezznasr.dev/">
@@ -254,6 +254,10 @@
     grid-template-columns:280px 1fr;
     gap:48px;
   }
+  /* Visual layout stays fact-panel-left / bio-right even though the bio now
+     comes first in the HTML source (better for how search engines read the page). */
+  .about-grid .fact-panel{ order:1; }
+  .about-grid .about-copy{ order:2; }
   .fact-panel{ padding:20px; }
   .fact-panel .portrait{
     display:block;
@@ -479,6 +483,10 @@
         <h2>Who's building this</h2>
       </div>
       <div class="about-grid">
+        <div class="about-copy reveal">
+          <p><strong>I'd rather ship one complete system than five half-finished demos.</strong> My main project, a factory ERP, is already running in daily use at a manufacturing business. My invoice tool went through three real iterations, from a command-line script to a published web app. My NFC lock exists as an actual soldered board, routed in KiCad and verified in Falstad before it ever ran firmware.</p>
+          <p>I write backend services in FastAPI, interfaces in React, and firmware in C++. I document all of it in LaTeX, the same way I'd write an engineering report, because a project nobody can read is a project nobody can trust.</p>
+        </div>
         <div class="fact-panel frame reveal">
           <span class="tick-br"></span><span class="tick-bl"></span>
           <!-- TODO: replace src with your real photo at /images/ezz-nasr.jpg (matches the JSON-LD and og:image above).
@@ -492,10 +500,6 @@
             <dt>Scholarship</dt><dd>DEPI Scholarship, Ministry of Education</dd>
             <dt>Current Focus</dt><dd>AWS Certified Cloud Practitioner, target Oct 2026</dd>
           </dl>
-        </div>
-        <div class="about-copy reveal">
-          <p><strong>I'd rather ship one complete system than five half-finished demos.</strong> My main project, a factory ERP, is already running in daily use at a manufacturing business. My invoice tool went through three real iterations, from a command-line script to a published web app. My NFC lock exists as an actual soldered board, routed in KiCad and verified in Falstad before it ever ran firmware.</p>
-          <p>I write backend services in FastAPI, interfaces in React, and firmware in C++. I document all of it in LaTeX, the same way I'd write an engineering report, because a project nobody can read is a project nobody can trust.</p>
         </div>
       </div>
     </div>
