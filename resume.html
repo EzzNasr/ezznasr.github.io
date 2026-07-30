@@ -4,8 +4,40 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ezz Nasr : Resume</title>
-<meta name="description" content="Ezz Nasr's resume. View inline or download the PDF.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230B2318'/%3E%3Cpath d='M8 8h6v6H8zM18 8h6v6h-6zM8 18h6v6H8zM18 18h6v6h-6zM14 11h4M11 14v4M21 14v4M14 21h4' stroke='%23C9974C' stroke-width='1.4' fill='none'/%3E%3C/svg%3E" type="image/svg+xml">
+<meta name="description" content="Ezz Nasr's resume — Computer Communications & AI student and software engineer. View inline or download the PDF.">
+
+<!-- Canonical + social/share meta, matching index.html -->
+<link rel="canonical" href="https://ezznasr.dev/resume.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ezz Nasr : Resume">
+<meta property="og:description" content="Resume for Ezz Nasr — Computer Communications & AI student, software engineer, and competitive programmer.">
+<meta property="og:url" content="https://ezznasr.dev/resume.html">
+<meta property="og:image" content="https://ezznasr.dev/images/ezz-nasr.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ezz Nasr : Resume">
+<meta name="twitter:description" content="Resume for Ezz Nasr — Computer Communications & AI student, software engineer, and competitive programmer.">
+<meta name="twitter:image" content="https://ezznasr.dev/images/ezz-nasr.jpg">
+
+<!-- Ties this page back to the same Person entity as the homepage -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Ezz Nasr",
+  "url": "https://ezznasr.dev",
+  "image": "https://ezznasr.dev/images/ezz-nasr.jpg",
+  "sameAs": [
+    "https://github.com/EzzNasr",
+    "https://www.linkedin.com/in/EzzNasr"
+  ]
+}
+</script>
+
+<link rel="icon" href="/icons/favicon.ico" sizes="any">
+<link rel="icon" href="/icons/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="/icons/favicon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<link rel="manifest" href="/icons/site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
@@ -228,6 +260,45 @@
     border:0;
     display:block;
   }
+
+  /* --- Click-to-load placeholder: this is what keeps the page fast.
+         Nothing PDF-related loads until the person clicks the button. --- */
+  .pdf-placeholder{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:18px;
+    text-align:center;
+    padding:32px;
+    background:
+      repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(201,151,76,0.04) 10px, rgba(201,151,76,0.04) 20px),
+      var(--panel);
+  }
+  .pdf-placeholder .doc-icon{
+    width:56px; height:72px;
+    border:2px solid var(--copper);
+    position:relative;
+    opacity:0.85;
+  }
+  .pdf-placeholder .doc-icon::before{
+    content:"";
+    position:absolute;
+    top:10px; left:8px; right:8px;
+    height:2px;
+    background:var(--copper);
+    box-shadow:0 8px 0 var(--copper), 0 16px 0 var(--copper), 0 24px 0 rgba(201,151,76,0.5);
+  }
+  .pdf-placeholder p{
+    margin:0;
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--ink-dim);
+    max-width:340px;
+  }
+
   .pdf-fallback{
     position:absolute;
     inset:0;
@@ -242,6 +313,20 @@
     font-size:13px;
     color:var(--ink-dim);
     background:var(--panel);
+  }
+
+  /* --- Plain-text resume summary: hidden visually, but present in the DOM
+         so search engines can index the actual resume content on this page
+         (crawlers reliably parse HTML text; embedded/iframed PDFs are far
+         less certain to get crawled or indexed at all). --- */
+  .sr-resume-text{
+    position:absolute;
+    width:1px; height:1px;
+    padding:0; margin:-1px;
+    overflow:hidden;
+    clip:rect(0,0,0,0);
+    white-space:nowrap;
+    border:0;
   }
 
   footer{ border-top:1px solid var(--line); padding:40px 0 32px; }
@@ -290,7 +375,7 @@
     </div>
 
     <h1>Resume</h1>
-    <p class="lede">The current version, kept in sync with what's documented on this site. View it inline below, or download the PDF or the source Word file.</p>
+    <p class="lede">The current version, kept in sync with what's documented on this site. Load the inline preview below, or download the PDF or the source Word file directly.</p>
 
     <div class="cta-row">
       <a class="btn solid" href="public/resume/Ezz_Nasr_Resume.pdf" download>Download PDF</a>
@@ -305,19 +390,28 @@
         <span class="tick-br"></span><span class="tick-bl"></span>
         <div class="viewer-topline">
           <span><span class="file-id">Ezz_Nasr_Resume.pdf</span> &nbsp;·&nbsp; inline preview</span>
-          <span>If the preview doesn't load, use Download or Open in new tab above.</span>
+          <span>Preview loads automatically, deferred until after the page settles.</span>
         </div>
-        <div class="pdf-frame-wrap">
-          <iframe src="public/resume/Ezz_Nasr_Resume.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH" title="Ezz Nasr Resume PDF" loading="lazy">
-            <div class="pdf-fallback">
-              <p>Your browser can't preview PDFs inline.</p>
-              <a class="btn solid" href="public/resume/Ezz_Nasr_Resume.pdf" download>Download PDF</a>
-            </div>
-          </iframe>
+        <div class="pdf-frame-wrap" id="pdf-wrap">
+          <div class="pdf-placeholder" id="pdf-placeholder">
+            <div class="doc-icon"></div>
+            <p id="pdf-status-text">Preparing preview&hellip; the rest of the page has already loaded, this won't hold anything up.</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- Visually hidden but present in the page's HTML, so Google can index the
+       actual resume content on this URL even before/without the PDF loading.
+       Keep this in sync whenever the PDF is updated. -->
+  <div class="sr-resume-text">
+    Ezz Nasr — Computer Communications & AI student at Alexandria University, expected graduation 2028.
+    Software engineer working across backend development (FastAPI, REST APIs), frontend (React),
+    embedded systems (ESP32, Arduino, KiCad), and competitive programming (C++, ICPC/ECPC track).
+    DEPI Scholarship recipient (Ministry of Education). Working toward AWS Certified Cloud Practitioner.
+    Full resume available as PDF download above.
+  </div>
 </main>
 
 <footer id="contact">
@@ -332,6 +426,44 @@
     </div>
   </div>
 </footer>
+
+<script>
+  (function(){
+    var wrap = document.getElementById('pdf-wrap');
+    var placeholder = document.getElementById('pdf-placeholder');
+    var statusText = document.getElementById('pdf-status-text');
+    if(!wrap || !placeholder) return;
+
+    function loadPdf(){
+      var iframe = document.createElement('iframe');
+      iframe.src = 'public/resume/Ezz_Nasr_Resume.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH';
+      iframe.title = 'Ezz Nasr Resume PDF';
+      // Swap in the iframe once it's actually ready, so the placeholder
+      // doesn't just vanish into a blank panel while the PDF renders.
+      iframe.addEventListener('load', function(){
+        if(wrap.contains(placeholder)) wrap.removeChild(placeholder);
+      });
+      wrap.appendChild(iframe);
+    }
+
+    function deferredLoad(){
+      // requestIdleCallback (where supported) waits until the browser is
+      // done with more urgent work — a little extra insurance beyond just
+      // waiting for 'load', with no fixed delay if the page is already idle.
+      if('requestIdleCallback' in window){
+        requestIdleCallback(loadPdf, { timeout: 2000 });
+      } else {
+        setTimeout(loadPdf, 300);
+      }
+    }
+
+    if(document.readyState === 'complete'){
+      deferredLoad();
+    } else {
+      window.addEventListener('load', deferredLoad);
+    }
+  })();
+</script>
 
 </body>
 </html>
