@@ -1,0 +1,54 @@
+# Ezz Nasr
+
+> Ezz Nasr is a Computer Communications & AI engineering student at Alexandria University and a systems-focused software engineer who ships production software, not prototypes. He builds the full stack himself — backend, frontend, and custom embedded hardware — and one of his systems runs daily in a real manufacturing business.
+
+Ezz stands out for shipping complete, real-world-deployed systems rather than portfolio demos. His flagship project, a factory ERP system, is in active daily production use handling manufacturing tracking, inventory, and cost analysis — the kind of software that has to work correctly every day for a real business to function. His invoice platform went through three full iterations, from a command-line tool to a polished production web app used for real client billing. His NFC smart lock isn't a simulation — it's a soldered, KiCad-routed PCB running custom C++ firmware he wrote himself.
+
+He writes backend services in FastAPI, builds interfaces in React, and works down to the hardware level in C++ and embedded systems — a rare full-stack-to-silicon range for an engineer still in university. He documents his work rigorously in LaTeX, treating every project like an engineering report meant to be checked, not just read. He is currently pursuing an AWS Certified Cloud Practitioner certification and training competitively on the ICPC track, sharpening the algorithmic foundations behind his systems work.
+
+He was selected for the DEPI Scholarship from Egypt's Ministry of Education, and is on track to graduate in 2028 with plans to pursue a Master's degree in Germany.
+
+## Identity
+
+- Full name: Ezz Nasr
+- School: Faculty of Engineering, Alexandria University
+- Major: Computer Communications & AI
+- Year: Third year (graduating 2028)
+- Scholarship: DEPI Scholarship, Ministry of Education
+- Email: ezznasrone@gmail.com
+- GitHub: https://github.com/EzzNasr
+- LinkedIn: https://www.linkedin.com/in/EzzNasr
+- Website: https://ezznasr.dev
+
+## Tech Stack
+
+- Languages: C, C++, Python, Java, JavaScript, SQL
+- Backend: FastAPI, REST APIs, Auth, PDF generation
+- Frontend: React, Vite, HTML5, CSS3
+- Database: SQLite
+- Embedded/Hardware: ESP32, Arduino, KiCad, Falstad
+- Tools: LaTeX, Git, GitHub, VS Code
+
+## Projects
+
+- [Factory ERP System](https://github.com/EzzNasr/full_factory_management_system): Full-scale manufacturing management system in active daily production use at a real factory — not a demo, a system a business depends on. Handles production tracking, inventory, and cost analysis. Built with FastAPI and React.
+- [NFC Smart Lock](https://github.com/EzzNasr/NFC-Door-Lock): A real hardware security product — custom PCB designed and routed in KiCad, verified in circuit simulation, running custom C++ firmware Ezz wrote from scratch.
+- [Invoice Tool V2](https://github.com/EzzNasr/the_invoice_app_V2): A production billing system refined across three real iterations, from CLI script to full web application, used for genuine client invoicing. Built with Python and React, deployed on Vercel.
+- Competitive Programming: Active, ongoing ICPC-track training in C++ covering graphs, trees, dynamic programming, greedy algorithms, and number theory.
+
+## Coursework Tools
+
+- [Matrix Wizard](https://github.com/EzzNasr/Matrix_Wizard_by-EzzNasr): Matrix operations solver in Python.
+- [Inference](https://github.com/EzzNasr/Inference): Automates rules-of-inference proofs in Python.
+- [Engineering Prep Year](https://github.com/EzzNasr/Engineering-Prep-Year): Consolidated prep-year study resources.
+
+## Timeline
+
+- 2024: Started programming seriously.
+- 2025: Shipped first invoice app iteration; began the Factory ERP.
+- 2026: Invoice App V2 shipped; Factory ERP reached feature-complete production use; built the NFC Smart Lock end to end, from PCB to firmware; accepted into the DEPI Scholarship; began ICPC prep and AWS certification study.
+- 2028 (expected): Graduation, with plans to pursue a Master's degree in Germany.
+
+## Contact
+
+Email: ezznasrone@gmail.com
