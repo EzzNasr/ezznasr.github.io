@@ -5,6 +5,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ezz Nasr : Problem Solver </title>
 <meta name="description" content="Ezz Nasr. Computer Engineering student building Full systems, embedded hardware, and PCB-level electronics.">
+
+<!-- Canonical URL — tells Google this is the one true home for this page's content -->
+<link rel="canonical" href="https://ezznasr.dev/">
+
+<!-- Open Graph — controls how this page looks when shared on LinkedIn, WhatsApp, Slack, etc. -->
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Ezz Nasr : Problem Solver">
+<meta property="og:description" content="Computer Communications & AI student at Alexandria University, building full systems end to end — backend, frontend, and embedded hardware.">
+<meta property="og:url" content="https://ezznasr.dev/">
+<meta property="og:image" content="https://ezznasr.dev/images/ezz-nasr.jpg">
+<meta property="profile:first_name" content="Ezz">
+<meta property="profile:last_name" content="Nasr">
+
+<!-- Twitter/X card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ezz Nasr : Problem Solver">
+<meta name="twitter:description" content="Computer Communications & AI student building full systems end to end — backend, frontend, and embedded hardware.">
+<meta name="twitter:image" content="https://ezznasr.dev/images/ezz-nasr.jpg">
+
+<!-- Schema.org Person markup — this is the single most important addition for name search.
+     It explicitly tells Google "this page is about a person named Ezz Nasr" and links every
+     one of your profiles together as the same entity (the sameAs array). Update the LinkedIn
+     URL below if your handle differs, and swap the image path once you upload a real photo. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Ezz Nasr",
+  "url": "https://ezznasr.dev",
+  "image": "https://ezznasr.dev/images/ezz-nasr.jpg",
+  "jobTitle": "Computer Communications & AI Student / Software Engineer",
+  "description": "Computer Communications & AI student at Alexandria University building backend systems, web interfaces, and embedded hardware.",
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": "Alexandria University"
+  },
+  "email": "mailto:ezznasrone@gmail.com",
+  "sameAs": [
+    "https://github.com/EzzNasr",
+    "https://www.linkedin.com/in/EzzNasr"
+  ]
+}
+</script>
+
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230B2318'/%3E%3Cpath d='M8 8h6v6H8zM18 8h6v6h-6zM8 18h6v6H8zM18 18h6v6h-6zM14 11h4M11 14v4M21 14v4M14 21h4' stroke='%23C9974C' stroke-width='1.4' fill='none'/%3E%3C/svg%3E" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,14 +72,12 @@
     --maxw:1080px;
     --beam-width: 3px;
   }
-
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
     *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
   }
-
   body{
     margin:0;
     background:
@@ -49,13 +91,11 @@
     -webkit-font-smoothing:antialiased;
     overflow-x: hidden;
   }
-
   a{color:var(--copper-bright);}
   a:focus-visible, button:focus-visible{
     outline:2px solid var(--copper-bright);
     outline-offset:3px;
   }
-
   .wrap{
     max-width:var(--maxw);
     margin:0 auto;
@@ -63,7 +103,6 @@
     position: relative;
     z-index: 2;
   }
-
   .eyebrow{
     font-family:var(--mono);
     font-size:12px;
@@ -71,7 +110,6 @@
     text-transform:uppercase;
     color:var(--copper);
   }
-
   h1,h2,h3{
     font-family:var(--mono);
     text-transform:uppercase;
@@ -79,7 +117,6 @@
     color:var(--ink);
     margin:0;
   }
-
   /* ---------- corner registration marks, the signature motif ---------- */
   .frame{
     position:relative;
@@ -101,7 +138,6 @@
   .frame::after{ top:-1px; right:-1px; border-top-width:2px; border-right-width:2px; }
   .frame .tick-bl{ bottom:-1px; left:-1px; border-bottom-width:2px; border-left-width:2px; }
   .frame .tick-br{ bottom:-1px; right:-1px; border-bottom-width:2px; border-right-width:2px; }
-
   /* ---------- header / title block ---------- */
   header{
     position:sticky;
@@ -143,7 +179,6 @@
   }
   nav a{color:var(--ink-dim); text-decoration:none; transition:color .15s ease;}
   nav a:hover{color:var(--copper-bright);}
-
   /* ---------- hero ---------- */
   .hero{
     padding:88px 0 64px;
@@ -166,7 +201,6 @@
   }
   .tb-meta div:last-child{border-right:none;}
   .tb-meta b{display:block; color:var(--copper); font-weight:600; margin-bottom:2px; font-size:10px;}
-
   .hero h1{
     font-size:clamp(42px,7vw,84px);
     line-height:0.98;
@@ -207,25 +241,33 @@
   .btn.solid{ background:var(--copper); color:var(--bg); }
   .btn.solid:hover{ background:var(--copper-bright); }
   .btn:not(.solid):hover{ background:rgba(201,151,76,0.12); }
-
   /* ---------- sections ---------- */
   section{ padding:72px 0; border-top:1px solid var(--line); position: relative; }
   .section-head{ margin-bottom:36px; position: relative; }
   .section-head h2{ font-size:22px; margin-top:6px; }
-
   .about-grid{
     display:grid;
     grid-template-columns:280px 1fr;
     gap:48px;
   }
   .fact-panel{ padding:20px; }
+  .fact-panel .portrait{
+    display:block;
+    width:100%;
+    max-width:240px;
+    height:auto;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    border:1px solid var(--line);
+    filter:grayscale(0.25) contrast(1.05);
+    margin-bottom:18px;
+  }
   .fact-panel dl{ margin:0; font-family:var(--mono); font-size:12.5px; }
   .fact-panel dt{ color:var(--copper); text-transform:uppercase; letter-spacing:0.08em; margin-top:14px; }
   .fact-panel dt:first-child{ margin-top:0; }
   .fact-panel dd{ margin:3px 0 0; color:var(--ink); }
   .about-copy p{ color:var(--ink-dim); margin:0 0 16px; }
   .about-copy strong{ color:var(--ink); font-weight:600; }
-
   .focus-list{ list-style:none; margin:20px 0 0; padding:0; font-family:var(--mono); font-size:12.5px; }
   .focus-list li{
     display:flex; gap:10px; align-items:baseline;
@@ -233,7 +275,6 @@
   }
   .focus-list li:first-child{ border-top:none; }
   .focus-list li::before{ content:"\25A2"; color:var(--copper); flex:0 0 auto; }
-
   /* ---------- BOM table ---------- */
   table.bom{
     width:100%;
@@ -267,7 +308,6 @@
   table.bom tr:hover td{ background:rgba(201,151,76,0.05); color:var(--ink); }
   table.bom td.ref{ color:var(--copper-bright); font-weight:600; white-space:nowrap; }
   table.bom td.item{ color:var(--ink); }
-
   /* ---------- project modules ---------- */
   .modules{
     display:grid;
@@ -308,7 +348,6 @@
     color:var(--copper-bright);
   }
   .module-link::after{ content:" \2192"; }
-
   /* ---------- coursework tools ---------- */
   .tools-row{
     display:grid;
@@ -320,7 +359,6 @@
   .tool-card h4{ font-family:var(--mono); font-size:13px; margin:0 0 6px; color:var(--ink); text-transform:none; letter-spacing:0; }
   .tool-card p{ margin:0; font-size:13.5px; color:var(--ink-dim); }
   .tool-card a{ font-family:var(--mono); font-size:11px; text-decoration:none; }
-
   /* ---------- revision history ---------- */
   table.rev{ width:100%; border-collapse:collapse; }
   table.rev th{
@@ -331,7 +369,6 @@
   table.rev td.rev-id{ font-family:var(--mono); color:var(--copper-bright); white-space:nowrap; font-size:13px; }
   table.rev td.rev-date{ font-family:var(--mono); color:var(--ink-dim); font-size:13px; white-space:nowrap; }
   table.rev td.rev-note{ color:var(--ink-dim); font-size:14.5px; }
-
   /* ---------- footer / title block ---------- */
   footer{ border-top:1px solid var(--line); padding:48px 0 36px; position: relative; }
   .footer-grid{
@@ -345,11 +382,9 @@
   .footer-links a{ color:var(--ink-dim); text-decoration:none; }
   .footer-links a:hover{ color:var(--copper-bright); }
   .footer-note{ font-family:var(--mono); font-size:11px; color:var(--ink-dim); letter-spacing:0.04em; }
-
   /* ---------- reveal on scroll ---------- */
   .reveal{ opacity:0; transform:translateY(14px); transition:opacity .5s ease, transform .5s ease; }
   .reveal.in{ opacity:1; transform:translateY(0); }
-
   /* ---------- responsive ---------- */
   @media (max-width:760px){
     .about-grid{ grid-template-columns:1fr; }
@@ -360,7 +395,6 @@
     table.bom{ font-size:11.5px; }
     table.bom th:nth-child(4), table.bom td:nth-child(4){ display:none; }
   }
-
   /* ---------- THE BEAM ---------- */
   #beam-container {
     position: absolute;
@@ -372,14 +406,12 @@
     z-index: 1;
     overflow: visible;
   }
-
   #beam-svg {
     display: block;
     width: 100%;
     height: 100%;
     overflow: visible;
   }
-
   .beam-path {
     fill: none;
     stroke: var(--copper);
@@ -392,7 +424,6 @@
     stroke-dasharray: 1;
     stroke-dashoffset: 1;
   }
-
   .beam-head {
     fill: var(--copper-bright);
     filter: drop-shadow(0 0 10px var(--copper-bright));
@@ -401,14 +432,12 @@
 </style>
 </head>
 <body>
-
 <div id="beam-container">
   <svg id="beam-svg">
     <path id="beam-path" class="beam-path" d="" />
     <circle id="beam-head" class="beam-head" r="4" cx="-10" cy="-10" />
   </svg>
 </div>
-
 <header>
   <div class="wrap titlebar">
     <a href="#top" class="mark"><span class="dot"></span> EZZ NASR</a>
@@ -422,9 +451,7 @@
     </nav>
   </div>
 </header>
-
 <main id="top">
-
   <div class="wrap hero">
     <div class="tb-meta">
       <div><b>Dwg No.</b>EN-2026-01</div>
@@ -432,18 +459,15 @@
       <div><b>Scale</b>1:1</div>
       <div><b>Sheet</b>1 of 1</div>
     </div>
-
     <h1 id="hero-name">Ezz Nasr</h1>
     <div class="role"> Software  &nbsp;/&nbsp; Hardware &nbsp;/&nbsp; Real World Systems</div>
     <p class="lede">Third-year Computer Engineering student who builds complete systems end to end: the API and the database behind it, the interface on top, and, when the project calls for it, the circuit board underneath. Everything below is public or documented, so it can be checked, not just read.</p>
-
     <div class="cta-row">
       <a class="btn solid" href="#work">See the work</a>
       <a class="btn" href="mailto:ezznasrone@gmail.com">Email me</a>
       <a class="btn" href="https://github.com/EzzNasr" target="_blank" rel="noopener">GitHub</a>
     </div>
   </div>
-
   <section id="about">
     <div class="wrap">
       <div class="section-head reveal">
@@ -453,6 +477,9 @@
       <div class="about-grid">
         <div class="fact-panel frame reveal">
           <span class="tick-br"></span><span class="tick-bl"></span>
+          <!-- TODO: replace src with your real photo at /images/ezz-nasr.jpg (matches the JSON-LD and og:image above).
+               Keep the alt text as your full name — that's the caption Google Images indexes it under. -->
+          <img src="images/ezz-nasr.jpg" alt="Ezz Nasr" class="portrait" width="240" height="240" loading="lazy">
           <dl>
             <dt>School</dt><dd> Faculty of Engineering · Alexandria University</dd>
             <dt>Major</dt><dd>Computer Communications &amp; AI</dd>
@@ -469,7 +496,6 @@
       </div>
     </div>
   </section>
-
   <section id="stack">
     <div class="wrap">
       <div class="section-head reveal">
@@ -487,7 +513,7 @@
             <tr><td class="ref">U1</td><td class="item">C · C++ · Python · Java · JavaScript · SQL</td><td>Languages</td><td>DSA coursework was in C; C++ carries the projects</td></tr>
             <tr><td class="ref">U2</td><td class="item">FastAPI · REST APIs · Auth · PDF generation</td><td>Backend</td><td></td></tr>
             <tr><td class="ref">U3</td><td class="item">React · Vite · HTML5 · CSS3</td><td>Frontend</td><td>Interfaces for the backend services</td></tr>
-            <tr><td class="ref">U4</td><td class="item">SQLite · PostgreSQL</td><td>Database</td><td></td></tr>
+            <tr><td class="ref">U4</td><td class="item">SQLite </td><td>Database</td><td></td></tr>
             <tr><td class="ref">U5</td><td class="item">ESP32 · Arduino · KiCad · Falstad</td><td>Embedded / Hardware</td><td>Firmware through PCB layout and simulation</td></tr>
             <tr><td class="ref">U6</td><td class="item">LaTeX · Git · GitHub · VS Code</td><td>Docs / Tools</td><td>Reports, version control, day to day work</td></tr>
             <tr><td class="ref">C1</td><td class="item">AWS Certified Cloud Practitioner</td><td>Certification</td><td>In Progress</td></tr>
@@ -497,7 +523,6 @@
       </div>
     </div>
   </section>
-
   <section id="work">
     <div class="wrap">
       <div class="section-head reveal">
@@ -513,11 +538,10 @@
           </div>
           <p>Full-scale manufacturing management system for a real factory. Handles production tracking, inventory, and cost analysis.</p>
           <div class="chips">
-            <span class="chip">FastAPI</span><span class="chip">React</span><span class="chip">PostgreSQL</span>
+            <span class="chip">FastAPI</span><span class="chip">React</span>
           </div>
-          <span class="module-link" style="color:var(--ink-dim); cursor:default;">Repo publishing after refactor</span>
+          <a class="module-link" href="https://github.com/EzzNasr/full_factory_management_system" target="_blank" rel="noopener">View repo</a>
         </div>
-
         <div class="module frame reveal">
           <span class="tick-br"></span><span class="tick-bl"></span>
           <div class="module-top">
@@ -530,7 +554,6 @@
           </div>
           <a class="module-link" href="https://github.com/EzzNasr/NFC-Door-Lock" target="_blank" rel="noopener">View repo</a>
         </div>
-
         <div class="module frame reveal">
           <span class="tick-br"></span><span class="tick-bl"></span>
           <div class="module-top">
@@ -543,7 +566,6 @@
           </div>
           <a class="module-link" href="https://github.com/EzzNasr/the_invoice_app_V2" target="_blank" rel="noopener">View repo</a>
         </div>
-
         <div class="module frame reveal">
           <span class="tick-br"></span><span class="tick-bl"></span>
           <div class="module-top">
@@ -558,7 +580,6 @@
       </div>
     </div>
   </section>
-
   <section id="tools">
     <div class="wrap">
       <div class="section-head reveal">
@@ -590,7 +611,6 @@
       </div>
     </div>
   </section>
-
   <section id="history">
     <div class="wrap">
       <div class="section-head reveal">
@@ -611,9 +631,7 @@
       </div>
     </div>
   </section>
-
 </main>
-
 <footer id="contact">
   <div class="wrap">
     <div class="section-head reveal">
@@ -630,7 +648,6 @@
     </div>
   </div>
 </footer>
-
 <script>
   (function(){
     // --- Reveal on scroll ---
@@ -648,7 +665,6 @@
       }, { threshold: 0.12 });
       els.forEach(function(el){ io.observe(el); });
     }
-
     // --- THE BEAM LOGIC ---
     const beamPath = document.getElementById('beam-path');
     const beamHead = document.getElementById('beam-head');
@@ -661,33 +677,27 @@
       const scrollY = window.scrollY;
       const winWidth = window.innerWidth;
       const isMobile = winWidth < 760;
-
       // Start point: right side of the name "Ezz Nasr"
       let startX = nameRect.right + window.scrollX;
       let startY = nameRect.top + scrollY + (nameRect.height / 2);
-
       let d = `M ${startX} ${startY}`;
       
       // Routing points
       let currentX = startX;
       let currentY = startY;
-
       // 1. Move right from name
       let p1X = currentX + (isMobile ? 20 : 50);
       d += ` L ${p1X} ${currentY}`;
       currentX = p1X;
-
       // 2. 45 degree down-right to a vertical spine
       // Spine position: Left side of the wrap container
       const wrap = document.querySelector('.wrap');
       const wrapRect = wrap.getBoundingClientRect();
       let spineX = wrapRect.left + window.scrollX + (isMobile ? 10 : 15);
-
       let angleDist = Math.abs(currentX - spineX);
       d += ` L ${spineX} ${currentY + angleDist}`;
       currentX = spineX;
       currentY += angleDist;
-
       // 3. Route through sections
       sections.forEach((section) => {
         const sectionHead = section.querySelector('.section-head');
@@ -695,16 +705,13 @@
         
         const headRect = sectionHead.getBoundingClientRect();
         const headY = headRect.top + scrollY + (headRect.height / 2);
-
         // Vertical down to just above section head
         d += ` L ${currentX} ${headY - 20}`;
         currentY = headY - 20;
-
         // 45 degree into the section head
         d += ` L ${currentX + 20} ${headY}`;
         currentX += 20;
         currentY = headY;
-
         // Small horizontal tick into content
         d += ` L ${currentX + 15} ${currentY}`;
         
@@ -714,7 +721,6 @@
         currentX -= 20;
         currentY += 20;
       });
-
       // 4. Final vertical to footer
       const footerRect = footer.getBoundingClientRect();
       const footerY = footerRect.top + scrollY + 40;
@@ -729,14 +735,11 @@
         d += ` L ${currentX + 20} ${linksY}`;
         d += ` L ${currentX + 40} ${linksY}`;
       }
-
       return d;
     }
-
     function updateBeam() {
       const d = generatePath();
       beamPath.setAttribute('d', d);
-
       const pathLength = beamPath.getTotalLength();
       beamPath.style.strokeDasharray = pathLength;
       
@@ -752,7 +755,6 @@
       const drawLength = pathLength * Math.min(progress * 1.2, 1);
       
       beamPath.style.strokeDashoffset = pathLength - drawLength;
-
       if (drawLength > 0) {
         const headPoint = beamPath.getPointAtLength(drawLength);
         beamHead.setAttribute('cx', headPoint.x);
@@ -762,13 +764,11 @@
         beamHead.style.opacity = 0;
       }
     }
-
     // Use ResizeObserver for more robust updates
     const ro = new ResizeObserver(() => {
       updateBeam();
     });
     ro.observe(document.body);
-
     window.addEventListener('scroll', updateBeam, { passive: true });
     
     // Initial setup
@@ -784,7 +784,6 @@
       // Small delay to ensure layout is stable before first draw
       setTimeout(updateBeam, 50);
     }
-
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', init);
     } else {
@@ -792,6 +791,5 @@
     }
   })();
 </script>
-
 </body>
 </html>
