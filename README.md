@@ -1,115 +1,90 @@
-# ezznasr.dev — Integration Notes (Rev 2026.08)
+# ezznasr.dev
 
-This README covers how to drop `teaching.html`, `index.html`, and `resume.html`
-into the live site as edits to what's already deployed. It assumes the site is
-static files served from a root (e.g. GitHub Pages, Vercel, Netlify, or plain
-hosting) — adjust the deploy step for whatever you're actually using.
+Personal site — home page, resume, and teaching portfolio. Static HTML/CSS/JS,
+no build step, no framework. Hosted on GitHub Pages via `CNAME` → `ezznasr.dev`.
 
-## What's in this drop
+## Skeleton
 
-| File | Type | Action |
+```
+.
+├── index.html              # home — hero, about, stack, work, coursework tools, history, contact
+├── resume.html              # inline PDF viewer + download links
+├── teaching.html             # teaching portfolio — programming / math / english
+├── 404.html                  # not-found page
+├── CNAME                      # ezznasr.dev
+├── robots.txt                  # points crawlers at sitemap.xml
+├── sitemap.xml                  # crawl targets, see below
+├── llms.txt                      # plain-text identity/summary for LLM crawlers
+├── icons/                         # favicons + site.webmanifest
+├── images/
+│   └── ezz-nasr.jpg                # portrait, used by og:image + JSON-LD across all pages
+└── public/
+    ├── resume/
+    │   ├── Ezz_Nasr_Resume.pdf       # source of truth for resume.html's inline viewer
+    │   └── Ezz_Nasr_Resume.docx       # downloadable source file
+    └── assets/
+        └── banner.svg                   # unused on-site; leftover from GitHub profile README, not linked anywhere here
+```
+
+Every page is self-contained — CSS and JS inline, no shared stylesheet or
+bundle. Duplication across pages (header, footer, design tokens) is
+intentional, not an oversight: keeps each page a single file to read top to
+bottom.
+
+## Pages
+
+| Page | Path | Sections / anchors |
 |---|---|---|
-| `teaching.html` | New page | Add at site root: `/teaching.html` |
-| `index.html` | Existing page | **Replace** — only change is the nav gained a `Teaching` link |
-| `resume.html` | Existing page | **Replace** — only change is the nav gained a `Teaching` link |
+| Home | `/` | `#about` `#stack` `#work` `#tools` `#history` `#contact` |
+| Resume | `/resume.html` | inline PDF viewer, PDF/.docx download |
+| Teaching | `/teaching.html` | `#programming` `#math` `#english` |
+| 404 | any unmatched path | GitHub Pages serves this automatically |
 
-No CSS/JS files were split out — each page is self-contained (styles and
-scripts inline), so there's nothing else to copy for these three files to
-render correctly.
+Nav is identical across `index.html` / `resume.html` / `teaching.html`
+(About / Stack / Work / Teaching / Resume / Contact), with the current page
+marked via `.current`. When adding a page, update nav in all three.
 
-## 1. Diff before you overwrite
+## SEO / discovery
 
-Since `index.html` and `resume.html` already exist live, don't blind-copy over
-them if you've made other edits since the last version I saw. Diff first:
+- `sitemap.xml` — currently lists `/` and `/resume.html`. **`teaching.html`
+  still needs to be added** (see TODO).
+- `robots.txt` — allow-all, points to `sitemap.xml`.
+- `llms.txt` — plain-text identity summary + project list, for LLM-based
+  crawlers/answer engines rather than traditional search.
+- Every page carries its own `<link rel="canonical">`, Open Graph / Twitter
+  card tags, and a `Person` JSON-LD block (`sameAs`: GitHub + LinkedIn) —
+  ties all pages back to the same entity for name search.
+- `resume.html` also keeps a visually-hidden plain-text resume summary in
+  the DOM (`.sr-resume-text`), since crawlers index HTML text far more
+  reliably than an embedded PDF.
 
-```bash
-diff old/index.html new/index.html
-diff old/resume.html new/resume.html
-```
+## Design system
 
-The only intended difference in both files is one line in the `<nav>` block:
+Blueprint / technical-drawing aesthetic, shared across every page:
 
-```html
-<a href="teaching.html">Teaching</a>
-```
+- Palette: deep green background (`--bg: #0B2318`), copper accent
+  (`--copper: #C9974C` / `--copper-bright: #E3B168`)
+- Type: IBM Plex Mono (labels, meta, UI) + Source Serif 4 (body copy)
+- Motif: corner registration ticks (`.frame`), title-block metadata strip
+  (`.tb-meta` — Dwg No. / Rev / Sheet / Status), BOM-style tables
+- Motion: scroll-reveal via `IntersectionObserver`, hover lift on cards —
+  all off under `prefers-reduced-motion`
 
-added between the last section link and `Resume`/`Contact`. If your diff shows
-more than that, you've likely diverged from this version — merge by hand
-rather than overwriting.
+New pages should reuse these tokens rather than introduce new ones —
+`teaching.html` is the reference for how to extend the system into new
+content without changing how it looks.
 
-## 2. Where things must line up
+## Deploy
 
-`teaching.html` assumes the same file layout as the rest of the site:
+GitHub Pages, built straight from this repo (no Actions/build step) —
+push to the default branch and it's live. `CNAME` handles the custom
+domain.
 
-- `index.html`, `resume.html`, `teaching.html` all live together at site root
-  (so relative links like `index.html#about` and `resume.html` resolve).
-- `/icons/*` (favicons, manifest) — already present if `index.html` works today.
-- Google Fonts are loaded from `fonts.googleapis.com` at request time — no
-  local font files to sync.
+## TODO
 
-Nothing in this drop needs a build step. It's plain HTML/CSS/JS — copy the
-files in and they work.
-
-## 3. Sitemap
-
-`sitemap.xml` already includes `teaching.html` (added in the last pass, dated
-`2026-08-10`). If your live sitemap predates that, add:
-
-```xml
-<url>
-  <loc>https://ezznasr.dev/teaching.html</loc>
-  <lastmod>2026-08-10</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.8</priority>
-</url>
-```
-
-Bump `<lastmod>` on the `index.html` and `resume.html` entries too, since both
-changed (nav only, but a crawler doesn't know that).
-
-## 4. Deploy
-
-Pick whichever matches your actual setup:
-
-**Git-based (GitHub Pages / Vercel / Netlify via repo):**
-```bash
-cp teaching.html index.html resume.html /path/to/repo/
-cd /path/to/repo
-git add teaching.html index.html resume.html sitemap.xml
-git commit -m "Add teaching portfolio page, link it from nav"
-git push
-```
-
-**Plain static host (rsync/SFTP/manual upload):**
-```bash
-rsync -av teaching.html index.html resume.html user@host:/var/www/ezznasr.dev/
-```
-
-## 5. Post-deploy checklist
-
-Not automated — check by hand after it's live:
-
-- [ ] `ezznasr.dev/teaching.html` loads, nav highlights "Teaching" as current
-- [ ] `ezznasr.dev/` and `ezznasr.dev/resume.html` — nav now shows "Teaching"
-      and clicking it lands on the new page
-- [ ] `ezznasr.dev/teaching.html#programming`, `#math`, `#english` anchors
-      scroll to the right section (test the exact link you'll send to
-      موقع الخطة التعليمية / the Bakalorya application, likely `#programming`)
-- [ ] Resubmit `sitemap.xml` in Google Search Console so the new page and
-      updated nav get recrawled sooner rather than waiting for the next
-      organic crawl
-
-## 6. Outstanding TODOs left in the pages
-
-These are marked inline in `teaching.html` with `<!-- TODO -->` comments —
-listed here so nothing gets missed once you have real content:
-
-- Programming: swap the video placeholder for the actual `<iframe>` embed
-  once the Functions demo is recorded and uploaded
-- Math: topic title, video embed, and the three stat numbers (students
-  tutored / avg. score lift / sessions run)
-- English: topic title, video embed, and the three stat numbers (students
-  taught / countries / sessions run)
-- Top-of-page lede: replace the placeholder line with a real aggregate stat
-  once you have one (e.g. "Taught 40+ students across these subjects since
-  2023")
+- [ ] Add `teaching.html` to `sitemap.xml`
+- [ ] `images/ezz-nasr.jpg` — confirm it's the real photo, not a placeholder
+- [ ] Teaching page: Functions video embed, Math + English samples and
+      stats (tracked inline as `<!-- TODO -->` comments in `teaching.html`)
+- [ ] Decide whether `public/assets/banner.svg` is still needed — currently
+      dead weight, not referenced by any page
